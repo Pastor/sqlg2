@@ -1,5 +1,13 @@
 buildscript {
     apply from: 'properties.gradle'
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.ajoberstar:gradle-git-publish:0.3.3'
+    }
 }
 
 allprojects {
@@ -10,6 +18,7 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
+    apply plugin: 'org.ajoberstar.git-publish'
 
     compileJava.options.encoding = 'UTF-8'
 
@@ -44,6 +53,24 @@ subprojects {
         exclude 'sqlg2/db/server/**'
         exclude 'sqlg2/lexer/**'
         exclude 'sqlg2/queries/**'
+    }
+
+    gitPublish {
+        repoUri = 'git@github.com:Pastor/sqlg2.git'
+        branch = 'mvn-repo'
+        repoDir = file("$buildDir/gitPublish")
+        contents {
+            from 'src/pages'
+            from(javadoc) {
+                into 'api'
+            }
+        }
+
+        preserve {
+            include '1.0.0/**'
+            exclude '1.0.0/temp.txt'
+        }
+        commitMessage = 'Publishing a new page'
     }
 }
 

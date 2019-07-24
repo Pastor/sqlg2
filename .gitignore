@@ -9,3 +9,6 @@ lib/
 *.log
 wrapper/
 !/gradle/wrapper/
+.idea
+*.iml
+properties.gradle

@@ -1,3 +1,3 @@
 ext {
-    jdk5 = 'C:/java/jdk1.6.0_45'
+    jdk5 = 'C:/Users/andrey.khlebnikov/environment/jdk1.8.0_151'
 }
