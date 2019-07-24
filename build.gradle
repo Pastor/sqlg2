@@ -60,17 +60,16 @@ subprojects {
         branch = 'mvn-repo'
         repoDir = file("$buildDir/gitPublish")
         contents {
-            from 'src/pages'
-            from(javadoc) {
-                into 'api'
+            from("$buildDir/libs") {
+                into "com/github/osobolev/sqlg2/${project.name}/${version}"
             }
         }
 
         preserve {
-            include '1.0.0/**'
+            include "**/*"
             exclude '1.0.0/temp.txt'
         }
-        commitMessage = 'Publishing a new page'
+        commitMessage = "Publishing ${project.name} on $version"
     }
 }
 
